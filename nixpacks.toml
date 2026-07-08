@@ -2,7 +2,12 @@
 extensions = ["pdo_pgsql", "bcmath"]
 
 [phases.install]
-cmds = ["cp .env.example .env", "php artisan key:generate"]
+cmds = [
+  "composer install --no-interaction --prefer-dist --no-dev --optimize-autoloader",
+  "cp .env.example .env",
+  "php artisan key:generate",
+  "php artisan storage:link || true"
+]
 
 [start]
 cmd = "php artisan migrate --force && php artisan db:seed --force && php artisan serve --host=0.0.0.0 --port=$PORT"
