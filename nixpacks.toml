@@ -1,13 +1,8 @@
-[php]
-extensions = ["pdo_pgsql", "bcmath"]
-
 [phases.install]
 cmds = [
-  "mkdir -p bootstrap/cache storage/framework/cache storage/framework/sessions storage/framework/views storage/logs",
-  "composer install --no-interaction --prefer-dist --optimize-autoloader",
-  "chmod -R 775 bootstrap/cache storage",
-  "chmod +x entrypoint.sh"
+  "mkdir -p public",
+  'echo "health ok" > public/index.html'
 ]
 
 [start]
-cmd = "bash entrypoint.sh"
+cmd = "php -S 0.0.0.0:${PORT:-8080} -t public"
