@@ -3,8 +3,8 @@
         "builder": "NIXPACKS"
     },
     "deploy": {
-        "startCommand": "sh -c 'php -S 0.0.0.0:${PORT:-8080} -t public'",
-        "healthcheckPath": "/api/games",
+        "startCommand": "sh -c 'php -S 0.0.0.0:${PORT:-8080} -t public public/router.php'",
+        "healthcheckPath": "/",
         "healthcheckTimeout": 100
     }
 }
