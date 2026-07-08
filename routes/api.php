@@ -5,6 +5,11 @@ use App\Http\Controllers\Api\PublicController;
 use App\Http\Controllers\Api\AuthController;
 use App\Http\Controllers\Api\AdminController;
 
+// ─── Health Check ───
+Route::get('/', function () {
+    return response()->json(['status' => 'ok', 'app' => 'Japran API']);
+});
+
 // ─── Public Routes ───
 Route::get('/games', [PublicController::class, 'games']);
 Route::get('/accounts', [PublicController::class, 'accounts']);
