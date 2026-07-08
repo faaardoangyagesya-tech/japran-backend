@@ -1,7 +1,10 @@
+[php]
+extensions = ["pdo_pgsql", "bcmath"]
+
 [phases.install]
 cmds = [
-  "mkdir -p public",
-  'echo "health ok" > public/index.html'
+  "mkdir -p bootstrap/cache storage/framework/cache storage/framework/sessions storage/framework/views storage/logs",
+  "composer install --no-interaction --prefer-dist --optimize-autoloader"
 ]
 
 [start]
