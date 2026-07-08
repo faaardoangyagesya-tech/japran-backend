@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Account;
 use App\Models\Game;
 use App\Models\Announcement;
+use App\Models\Setting;
 
 class PublicController extends Controller
 {
@@ -61,5 +62,11 @@ class PublicController extends Controller
                 ->orderBy('created_at', 'desc')
                 ->get()
         );
+    }
+
+    public function settings()
+    {
+        $settings = Setting::pluck('value', 'key');
+        return response()->json($settings);
     }
 }

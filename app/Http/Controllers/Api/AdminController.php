@@ -8,6 +8,7 @@ use App\Models\Game;
 use App\Models\Admin;
 use App\Models\Announcement;
 use App\Models\Order;
+use App\Models\Setting;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 
@@ -217,6 +218,31 @@ class AdminController extends Controller
         }
         $admin->delete();
         return response()->json(['message' => 'Deleted']);
+    }
+
+    // ─── Settings ───
+    public function getSettings()
+    {
+        $settings = Setting::pluck('value', 'key');
+        return response()->json($settings);
+    }
+
+    public function updateSettings(Request $request)
+    {
+        $request->validate([
+            'phone' => 'string|max:50',
+            'admin2' => 'string|max:50',
+            'group_url' => 'string|max:255',
+            'channel_url' => 'string|max:255',
+            'instagram' => 'string|max:255',
+            'tiktok' => 'string|max:255',
+        ]);
+
+        foreach ($request->all() as $key => $value) {
+            Setting::updateOrCreate(['key' => $key], ['value' => $value]);
+        }
+
+        return response()->json(['message' => 'Settings updated']);
     }
 
     // ─── Dashboard Stats ───
