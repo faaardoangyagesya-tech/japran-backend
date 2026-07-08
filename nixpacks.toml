@@ -7,3 +7,6 @@ cmds = [
   "composer install --no-interaction --prefer-dist --optimize-autoloader",
   "chmod -R 775 bootstrap/cache storage"
 ]
+
+[start]
+cmd = "sleep infinity"
