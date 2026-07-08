@@ -29,6 +29,11 @@ Route::get('/setup', function () {
         DB::statement("CREATE TABLE orders (id BIGSERIAL PRIMARY KEY, account_id BIGINT NOT NULL REFERENCES accounts(id) ON DELETE CASCADE, buyer_contact VARCHAR(100) NOT NULL, recorded_by BIGINT NOT NULL REFERENCES admins(id) ON DELETE CASCADE, created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP, updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP)");
 
         $hash = bcrypt('japranadmin123');
+        DB::statement("CREATE TABLE personal_access_tokens (id BIGSERIAL PRIMARY KEY, tokenable_type VARCHAR(255) NOT NULL, tokenable_id BIGINT NOT NULL, name VARCHAR(255) NOT NULL, token VARCHAR(64) UNIQUE NOT NULL, abilities TEXT, last_used_at TIMESTAMP, expires_at TIMESTAMP, created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP, updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP)");
+        DB::statement("CREATE INDEX idx_personal_access_tokens_tokenable ON personal_access_tokens(tokenable_type, tokenable_id)");
+        DB::statement("CREATE INDEX idx_personal_access_tokens_token ON personal_access_tokens(token)");
+
+        $hash = bcrypt('japranadmin123');
         DB::statement("INSERT INTO admins (username, password, role) VALUES ('superadmin', '{$hash}', 'superadmin')");
         DB::statement("INSERT INTO games (name) VALUES ('Free Fire')");
         DB::statement("INSERT INTO games (name) VALUES ('Mobile Legends')");
