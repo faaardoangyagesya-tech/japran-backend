@@ -9,12 +9,12 @@ WORKDIR /var/www/html
 
 COPY . .
 
-RUN composer install --no-interaction --prefer-dist --no-dev --optimize-autoloader \
+RUN mkdir -p storage/framework/{cache,sessions,testing,views} storage/logs bootstrap/cache \
     && cp .env.example .env \
+    && composer install --no-interaction --prefer-dist --no-dev --optimize-autoloader \
     && php artisan key:generate \
-    && php artisan storage:link || true
-
-RUN chown -R www-data:www-data storage bootstrap/cache \
+    && php artisan storage:link || true \
+    && chown -R www-data:www-data storage bootstrap/cache \
     && chmod -R 775 storage bootstrap/cache
 
 EXPOSE 8080
