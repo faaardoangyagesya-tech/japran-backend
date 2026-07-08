@@ -12,7 +12,7 @@ cmds = [
 ]
 
 [deploy]
-cmd = "php artisan migrate:fresh --force --seed"
+cmd = "php artisan migrate --force 2>&1 | tee /tmp/migrate.log"
 
 [start]
-cmd = "php -S 0.0.0.0:8080 -t public"
+cmd = "php artisan serve --host=0.0.0.0 --port=8080 2>&1"
