@@ -12,8 +12,11 @@ Route::get('/', function () {
     return response()->json(['status' => 'ok', 'app' => 'Japran API']);
 });
 
-// ─── Setup (reset and seed database) ───
+// ─── Setup (reset and seed database, protected by setup key) ───
 Route::get('/setup', function () {
+    if (request('key') !== config('app.setup_key', 'japran-setup-2024')) {
+        return response()->json(['error' => 'Unauthorized'], 401);
+    }
     try {
         DB::statement('DROP SCHEMA public CASCADE');
         DB::statement('CREATE SCHEMA public');
