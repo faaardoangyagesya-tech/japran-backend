@@ -3,8 +3,8 @@
         "builder": "NIXPACKS"
     },
     "deploy": {
-        "startCommand": "sh -c 'php artisan serve --host=0.0.0.0 --port=${PORT:-8080}'",
-        "healthcheckPath": "/",
+        "startCommand": "sh -c 'php -S 0.0.0.0:${PORT:-8080} -t public'",
+        "healthcheckPath": "/api/games",
         "healthcheckTimeout": 100
     }
 }
