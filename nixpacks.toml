@@ -15,4 +15,4 @@ cmds = [
 cmd = "php artisan migrate:fresh --force --seed"
 
 [start]
-cmd = "php -S 0.0.0.0:${PORT} -t public"
+cmd = "php -S 0.0.0.0:8080 -t public"
