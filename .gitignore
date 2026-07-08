@@ -1,0 +1,11 @@
+/vendor/
+node_modules/
+.env
+.DS_Store
+storage/framework/cache/data/
+storage/framework/sessions/
+storage/framework/views/
+storage/logs/
+*.log
+.idea/
+*.swp
