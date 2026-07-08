@@ -8,8 +8,9 @@ cmds = [
   "cp .env.example .env",
   "php artisan key:generate",
   "php artisan storage:link || true",
-  "chmod -R 775 bootstrap/cache storage"
+  "chmod -R 775 bootstrap/cache storage",
+  "chmod +x entrypoint.sh"
 ]
 
 [start]
-cmd = "sh entrypoint.sh"
+cmd = "./entrypoint.sh"
